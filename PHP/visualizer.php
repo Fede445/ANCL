@@ -12,17 +12,35 @@ require_once "config.php";
 
 $test = $ps = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    if ($test == "PartiStipulanti"){
+if (isset($_POST["button1"])){
+    $ps = "Pulsante 1";
+}
+else if (isset($_POST["button2"])){
+    $sql = "SELECT partiStipulanti FROM stipule";
 
-    }
-    else if ($test == "Retribruzioni"){
+    if($stmt = $mysqli->prepare($sql)){
+        // Bind variables to the prepared statement as parameters
+        /*$stmt->bind_param("i", $param_ID);
+        
+        // Set parameters
+        $param_ID = 1;*/
+        
+        // Attempt to execute the prepared statement
+        if($stmt->execute()){
+            // Store result
+            $stmt->store_result();
+            
+            // Check if username exists, if yes then verify password
+            $stmt->bind_result($ps);
 
-    }
-    else{
-        echo "Oops! Something went wrong. Please try again later.";
+            $stmt->fetch();
+        }
     }
 }
+else if (isset($_POST{"clear"})){
+    $ps = "";
+}
+
 
 ?>
 
@@ -31,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Visualizer</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
     </style>
@@ -41,18 +59,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         <h1>Select what to visualize</h1>
     </div>
     <p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form method="post">
             <div class="form-group">
-                <input type="submit" class="btn btn-default" value="Retribruzioni" onclick="<?php $test = "Retribuzioni"; ?>">
+                <input type="submit" class="btn btn-primary" value="Retribruzioni" name="button1">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="PartiStipulanti" onclick="<?php $test = "PartiStipulanti"; ?>">
+                <input type="submit" class="btn btn-secondary" value="PartiStipulanti" name="button2">
             </div>
     </p>
     <p class="text-center">
     <div>
     <textarea class="form-control" rows="3" spellcheck="false" data-ms-editor="true"><?php echo $ps; ?></textarea>
     </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-danger" value="Cancella" name="clear">
+    </div>
+    <div class="form-group">
+        <a href="../index.php" class="btn btn-info">Home</a>
     </p>
 </body>
 </html>
