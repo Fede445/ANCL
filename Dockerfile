@@ -17,9 +17,10 @@ COPY . /app
 RUN composer dump-autoload --optimize --classmap-authoritative
 
 
-FROM php:8-apache
+FROM php:7.4-apache
 
-RUN pecl install mongodb && \
+RUN apt-get update && apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev && \
+    pecl install mongodb && \
     docker-php-ext-enable mongodb
 
 EXPOSE 80
