@@ -1,16 +1,24 @@
 <?php
-/* Database credentials. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-define('DB_SERVER', 'localhost');
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+define('DB_SERVER', 'database');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'ancl');
- 
-/* Attempt to connect to MySQL database */
-$mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
-// Check connection
-if($mysqli === false){
-    die("ERROR: Could not connect. " . $mysqli->connect_error);
+define('DB_PASSWORD', 'example');
+
+// MongoDB connection
+try{
+    // connect
+    $mongo = new MongoDB\Client(
+        "mongodb://" . DB_SERVER,
+        array("username" => DB_USERNAME, "password" => DB_PASSWORD)
+    );
+
+    // check connection
+    $mongo->listDatabases();
+} catch(MongoDB\Driver\Exception\ConnectionTimeoutException $e) {
+    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+    die();
 }
-?>
+
+$db = $mongo->ancl;
