@@ -8,7 +8,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true) {
 }
 
 // Include config file
-require_once "config.php";
+require_once "../config.php";
 
 $ps = "";
 if (isset($_GET["button2"])) {

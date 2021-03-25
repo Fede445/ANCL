@@ -14,6 +14,7 @@ services:
     build: .
     volumes:
       - ./web:/var/www/html/
+      - ./config.php:/var/www/config.php
     ports:
       - "8080:80"
     depends_on:
