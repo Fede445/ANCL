@@ -39,34 +39,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
     // Check input errors before updating the database
     if(empty($new_password_err) && empty($confirm_password_err)){
-        // Prepare an update statement
-        $sql = "UPDATE users SET password = ? WHERE id = ?";
-        
-        if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("si", $param_password, $param_id);
-            
-            // Set parameters
-            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $param_id = $_SESSION["id"];
-            
-            // Attempt to execute the prepared statement
-            if($stmt->execute()){
-                // Password updated successfully. Destroy the session, and redirect to login page
-                session_destroy();
-                header("location: login.php");
-                exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
+        // Set parameters
+        $param_password = password_hash($new_password, PASSWORD_DEFAULT);
+        $param_id = $_SESSION['username'];
 
-            // Close statement
-            $stmt->close();
+        try{
+            $update_result = $db->users->updateOne(['_id' => $param_id], ['$set' => ['password' => $param_password]]);
+            $update_count = $update_result->getModifiedCount();
+        } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+            die();
+        }
+
+        if(!is_null($update_count) && $update_count>0){
+            // Password updated successfully. Destroy the session, and redirect to login page
+            session_destroy();
+            header("location: login.php");
+            exit();
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
         }
     }
-    
-    // Close connection
-    $mysqli->close();
 }
 ?>
  
