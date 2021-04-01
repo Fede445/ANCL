@@ -47,7 +47,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["role"] = $user['role'];
-                $_SESSION["username"] = $user['_id'];                            
+                $_SESSION["username"] = $user['_id'];
+                $_SESSION["displayName"] = $user['displayName'];                      
                 
                 // Redirect user to welcome page
                 header("location: index.php");
@@ -92,7 +93,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>
     </div>    
 </body>

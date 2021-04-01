@@ -31,3 +31,25 @@ db.users.insertMany(
         }
     ]
 );
+
+db.createCollection('sectors');
+
+db.sectors.insertMany(
+    [
+        {
+            name: "Agenzie Immobiliari"
+        },
+        {
+            name: "Agricoltura (Impiegati)"
+        },
+        {
+            name: "Agricoltura (Operai)"
+        },
+        {
+            name: "Terziario - Confcommercio"
+        },
+        {
+            name: "Metalmeccanica - Industria"
+        }
+    ]
+);
