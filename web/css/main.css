@@ -53,7 +53,7 @@ body {
 
 main.container {
   padding: 10px 10px;
-  height: 100%;
+  min-height: 100%;
   background-color: #ffffff;
 }
 
