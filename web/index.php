@@ -10,10 +10,19 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-$query = $_GET['query'];
-$letter = isset($query) ? $query : 'a';
+if(isset($_GET['search'])) {
+    $user_string = $_GET['search'];
+    // Cerco la stringa tramite la funzione Text Search di MongoDB
+    $query = ['$text' => ['$search' => "$user_string"]];
+} else {
+    // Salvo la stringa se specificata, altrimenti ricado sulla a
+    $user_string = isset($_GET['letter']) ? $_GET['letter'] : 'a';
 
-$sectorsCursor = $db->sectors->find(['name' => ['$regex' => "^$letter", '$options' => 'i']]);
+    // Cerco i settori che inizano con la stringa $string
+    $query = ['name' => ['$regex' => "^$user_string", '$options' => 'i']];
+}
+
+$sectorsCursor = $db->sectors->find($query);
 ?>
  
 <!DOCTYPE html>
@@ -35,39 +44,39 @@ $sectorsCursor = $db->sectors->find(['name' => ['$regex' => "^$letter", '$option
             <h1 id="title">Tabelle Paga</h1>
             <br>
             <form class="search-container" method="GET">
-                <input type="search" name="query" placeholder="Cerca tabella, settore ..." class="search-field" required />
+                <input type="search" name="search" placeholder="Cerca tabella, settore ..." class="search-field" required />
                 <button type="submit" class="search-button">
                     <img src="img/search.svg">
                 </button>
             </form>
             <br>
             <nav class="alfabeto">
-                <a href="?query=A">A</a>
-                <a href="?query=B">B</a>
-                <a href="?query=C">C</a>
-                <a href="?query=D">D</a>
-                <a href="?query=E">E</a>
-                <a href="?query=F">F</a>
-                <a href="?query=G">G</a>
-                <a href="?query=H">H</a>
-                <a href="?query=I">I</a>
-                <a href="?query=J">J</a>
-                <a href="?query=K">K</a>
-                <a href="?query=L">L</a>
-                <a href="?query=M">M</a>
-                <a href="?query=N">N</a>
-                <a href="?query=O">O</a>
-                <a href="?query=P">P</a>
-                <a href="?query=Q">Q</a>
-                <a href="?query=R">R</a>
-                <a href="?query=S">S</a>
-                <a href="?query=T">T</a>
-                <a href="?query=U">U</a>
-                <a href="?query=V">V</a>
-                <a href="?query=W">W</a>
-                <a href="?query=X">X</a>
-                <a href="?query=Y">Y</a>
-                <a href="?query=Z">Z</a>
+                <a href="?letter=A">A</a>
+                <a href="?letter=B">B</a>
+                <a href="?letter=C">C</a>
+                <a href="?letter=D">D</a>
+                <a href="?letter=E">E</a>
+                <a href="?letter=F">F</a>
+                <a href="?letter=G">G</a>
+                <a href="?letter=H">H</a>
+                <a href="?letter=I">I</a>
+                <a href="?letter=J">J</a>
+                <a href="?letter=K">K</a>
+                <a href="?letter=L">L</a>
+                <a href="?letter=M">M</a>
+                <a href="?letter=N">N</a>
+                <a href="?letter=O">O</a>
+                <a href="?letter=P">P</a>
+                <a href="?letter=Q">Q</a>
+                <a href="?letter=R">R</a>
+                <a href="?letter=S">S</a>
+                <a href="?letter=T">T</a>
+                <a href="?letter=U">U</a>
+                <a href="?letter=V">V</a>
+                <a href="?letter=W">W</a>
+                <a href="?letter=X">X</a>
+                <a href="?letter=Y">Y</a>
+                <a href="?letter=Z">Z</a>
             </nav>
             <br>
             <div class="settori">

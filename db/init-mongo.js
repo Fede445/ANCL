@@ -53,3 +53,5 @@ db.sectors.insertMany(
         }
     ]
 );
+
+db.sectors.createIndex({ name: "text" }, { default_language: "italian" })
