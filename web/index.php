@@ -3,14 +3,14 @@ require_once __DIR__ . '/../config.php';
 
 // Initialize the session
 session_start();
- 
+
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
 
-if(isset($_GET['search'])) {
+if (isset($_GET['search'])) {
     $user_string = $_GET['search'];
     // Cerco la stringa tramite la funzione Text Search di MongoDB
     $query = ['$text' => ['$search' => "$user_string"]];
@@ -24,9 +24,10 @@ if(isset($_GET['search'])) {
 
 $sectorsCursor = $db->sectors->find($query);
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Tabelle paga | ANCL Verona</title>
     <meta charset="UTF-8" />
@@ -36,8 +37,9 @@ $sectorsCursor = $db->sectors->find($query);
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet" />
 </head>
+
 <body>
-    <?php include "header.php"?>
+    <?php include "header.php" ?>
 
     <div style="padding:0 16px;height:100%">
         <main class="container">
@@ -80,7 +82,7 @@ $sectorsCursor = $db->sectors->find($query);
             </nav>
             <br>
             <div class="settori">
-                <?php foreach($sectorsCursor as $sector) { ?>
+                <?php foreach ($sectorsCursor as $sector) { ?>
                     <p class="settore">
                         <img src="img/document.svg" alt="Visualizza file" width="18" height="18" class="miniatura" />
                         <?php echo htmlspecialchars($sector['name']); ?>
@@ -90,4 +92,5 @@ $sectorsCursor = $db->sectors->find($query);
         </main>
     </div>
 </body>
+
 </html>

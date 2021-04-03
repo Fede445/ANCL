@@ -1,80 +1,88 @@
 <?php
 // Initialize the session
 session_start();
- 
+
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: index.php");
     exit;
 }
- 
+
 // Include config file
 require_once "../config.php";
- 
+
 // Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = "";
- 
+
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // Check if username is empty
-    if(is_array($_POST["username"]) || empty(trim($_POST["username"]))){
+    if (is_array($_POST["username"]) || empty(trim($_POST["username"]))) {
         $username_err = "Please enter username.";
-    } else{
+    } else {
         $username = trim($_POST["username"]);
     }
-    
+
     // Check if password is empty
-    if(empty(trim($_POST["password"]))){
+    if (empty(trim($_POST["password"]))) {
         $password_err = "Please enter your password.";
-    } else{
+    } else {
         $password = trim($_POST["password"]);
     }
-    
+
     // Validate credentials
-    if(empty($username_err) && empty($password_err)){
+    if (empty($username_err) && empty($password_err)) {
         // Get the user
         $user = $db->users->findOne(['_id' => $username]);
 
         // Check if username exists, if yes then verify password
-        if(!is_null($user)){
+        if (!is_null($user)) {
 
-            if(password_verify($password, $user['password'])){
+            if (password_verify($password, $user['password'])) {
                 // Password is correct, so start a new session
                 session_start();
-                
+
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["role"] = $user['role'];
                 $_SESSION["username"] = $user['_id'];
-                $_SESSION["displayName"] = $user['displayName'];                      
-                
+                $_SESSION["displayName"] = $user['displayName'];
+
                 // Redirect user to welcome page
                 header("location: index.php");
-            } else{
+            } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";
             }
-        } else{
+        } else {
             // Display an error message if username doesn't exist
             $username_err = "No account found with that username.";
         }
     }
 }
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+        body {
+            font: 14px sans-serif;
+        }
+
+        .wrapper {
+            width: 350px;
+            padding: 20px;
+        }
     </style>
 </head>
+
 <body>
     <div class="wrapper">
         <h2>Login</h2>
@@ -94,6 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
         </form>
-    </div>    
+    </div>
 </body>
+
 </html>

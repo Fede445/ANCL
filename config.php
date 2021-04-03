@@ -8,7 +8,7 @@ define('DB_PASSWORD', 'RQmUP6fZFHdDbrKh');
 define('DB_NAME', 'ancl');
 
 // MongoDB connection
-try{
+try {
     // connect
     $mongo = new MongoDB\Client(
         "mongodb://" . DB_SERVER,
@@ -17,7 +17,7 @@ try{
 
     // check connection
     $mongo->listDatabases();
-} catch(MongoDB\Driver\Exception\ConnectionTimeoutException $e) {
+} catch (MongoDB\Driver\Exception\ConnectionTimeoutException $e) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
     die();
 }
