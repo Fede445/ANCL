@@ -9,6 +9,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
+
+if (isset($_GET["id"]) && !empty($_GET["id"])) {
+    $document = $db->tables->findOne(["_id" => new MongoDB\BSON\ObjectId($_GET["id"])]);
+} else {
+    // Se non ci sono parametri GET ritorno ai settori
+    header("location: index.php");
+    exit;
+}
+
+// TODO: implementare "documento non trovato"
+echo $document["name"]
 ?>
 
 <!DOCTYPE html>

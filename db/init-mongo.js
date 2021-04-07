@@ -55,3 +55,18 @@ db.sectors.insertMany(
 );
 
 db.sectors.createIndex({ name: "text" }, { default_language: "italian" })
+
+db.createCollection("tables")
+
+db.tables.insertMany(
+    [
+        {
+            name: "tabella 1",
+            valid_from: 1,
+        },
+        {
+            name: "tabella 2",
+            valid_from: 2,
+        }
+    ]
+)
