@@ -83,10 +83,10 @@ $sectorsCursor = $db->sectors->find($query);
             <br>
             <div class="settori">
                 <?php foreach ($sectorsCursor as $sector) { ?>
-                    <p class="settore">
+                    <a class="settore" href="to-table.php?sectorid=<?= $sector["_id"] ?>">
                         <img src="img/document.svg" alt="Visualizza file" width="18" height="18" class="miniatura" />
                         <?php echo htmlspecialchars($sector['name']); ?>
-                    </p>
+                    </a>
                 <?php } ?>
             </div>
         </main>
