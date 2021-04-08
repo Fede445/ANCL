@@ -77,7 +77,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
                 </thead>
                 <tr>
                     <td> Divisori contrattuali</td>
-                    <td colspan="3"><?= $document["parametri"]["divisori"]?></td>
+                    <td colspan="3"><?= nl2br($document["parametri"]["divisori"])?></td>
                 </tr>
                 <tr>
                     <td> Mensilità </td>
@@ -98,20 +98,20 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
                 </thead>
                 <tr>
                     <td> Previdenza complementare</td>
-                    <td colspan="3"> <?= $document["welfare"]["previdenza"]?></td>
+                    <td colspan="3"> <?= nl2br($document["welfare"]["previdenza"])?></td>
                 </tr>
                 <tr>
                     <td> Assistenza integrative </td>
-                    <td colspan="3"><?= $document["welfare"]["assistenza"]?></td>
+                    <td colspan="3"><?= nl2br($document["welfare"]["assistenza"])?></td>
                 </tr>
 
                 <tr>
                     <td> Enti bilaterali</td>
-                    <td colspan="3"><?= $document["welfare"]["enti"]?></td>
+                    <td colspan="3"><?= nl2br($document["welfare"]["enti"])?></td>
                 </tr>
                 <tr>
                     <td> Polizze assicurative </td>
-                    <td colspan="3"><?= $document["welfare"]["polizze"]?></td>
+                    <td colspan="3"><?= nl2br($document["welfare"]["polizze"])?></td>
                 </tr>
 
             </tbody>
