@@ -19,6 +19,11 @@ RUN composer dump-autoload --optimize --classmap-authoritative
 
 FROM php:7.4-apache
 
+RUN apt-get update && apt-get install -y locales locales-all
+ENV LC_ALL it_IT.UTF-8
+ENV LANG it_IT.UTF-8
+ENV LANGUAGE it_IT.UTF-8
+
 RUN apt-get update && apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev && \
     pecl install mongodb && \
     docker-php-ext-enable mongodb
@@ -27,5 +32,6 @@ EXPOSE 80
 
 # Copy our application
 COPY web/ /var/www/html/
+COPY *.php /var/www/
 # Copy the downloaded dependencies from the builder stage.
 COPY --from=builder /app/vendor/ /var/www/vendor/
