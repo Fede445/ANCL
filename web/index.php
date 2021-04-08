@@ -41,7 +41,7 @@ $sectorsCursor = $db->sectors->find($query);
 <body>
     <?php include "header.php" ?>
 
-    <div style="padding:0 16px;height:100%">
+    <div style="padding:0 16px;min-height:100vh">
         <main class="container">
             <h1 id="title">Tabelle Paga</h1>
             <br>
