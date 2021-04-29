@@ -49,6 +49,7 @@ body {
 .website {
   flex: 1;
 }
+
 /* END navbar*/
 
 main.container {
@@ -85,6 +86,7 @@ main.container {
   height: 15px;
   object-fit: cover;
 }
+
 /* END search bar */
 
 
@@ -123,7 +125,33 @@ main.container {
 .miniatura {
   margin: 0 5px;
 }
+
 /* END settori */
+
+@media print {
+  @page {
+    margin: 10mm;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto
+  }
+
+  table * {
+    font-size: 1em !important;
+  }
+
+  .dontprint {
+    display: none;
+  }
+}
 
 @media screen and (max-width: 450px) {
   .header .flex {

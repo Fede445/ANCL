@@ -40,19 +40,19 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
         <h2> TERZIARIO - CONFCOMMERCIO </h2>
         <h3> Vigente da <?= $document["valid_from"]->toDateTime()->format("F Y") ?></h3>
         <table class="minimalistBlack">
+            <thead>
+                <tr>
+                    <th colspan="4"> Stipule </th>
+                </tr>
+            </thead>
             <tbody>
-                <thead>
-                    <tr>
-                        <th colspan="4"> Stipule </th>
-                    </tr>
-                </thead>
                 <tr>
                     <td></td>
                     <td>Data di stipula</td>
                     <td>Decorrenza</td>
                     <td>Scadenza</td>
                 </tr>
-                <?php foreach($document["stipule"] as $stipula) { ?>
+                <?php foreach ($document["stipule"] as $stipula) { ?>
                     <tr>
                         <td style="border-bottom:none"><?= $stipula["name"] ?></td>
                         <td><?= $stipula["dataStipula"] ?></td>
@@ -69,19 +69,19 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
             </tbody>
         </table>
         <table class="minimalistBlack">
+            <thead>
+                <tr>
+                    <th colspan="4"> Parametri </th>
+                </tr>
+            </thead>
             <tbody>
-                <thead>
-                    <tr>
-                        <th colspan="4"> Parametri </th>
-                    </tr>
-                </thead>
                 <tr>
                     <td> Divisori contrattuali</td>
-                    <td colspan="3"><?= nl2br($document["parametri"]["divisori"])?></td>
+                    <td colspan="3"><?= nl2br($document["parametri"]["divisori"]) ?></td>
                 </tr>
                 <tr>
                     <td> Mensilità </td>
-                    <td colspan="3" style="text-align:center"><?= $document["parametri"]["mensilita"]?></td>
+                    <td colspan="3" style="text-align:center"><?= $document["parametri"]["mensilita"] ?></td>
                 </tr>
             </tbody>
         </table>
@@ -90,28 +90,28 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
 
 
         <table class="minimalistBlack">
+            <thead>
+                <tr>
+                    <th colspan="4"> Welfare </th>
+                </tr>
+            </thead>
             <tbody>
-                <thead>
-                    <tr>
-                        <th colspan="4"> Welfare </th>
-                    </tr>
-                </thead>
                 <tr>
                     <td> Previdenza complementare</td>
-                    <td colspan="3"> <?= nl2br($document["welfare"]["previdenza"])?></td>
+                    <td colspan="3"> <?= nl2br($document["welfare"]["previdenza"]) ?></td>
                 </tr>
                 <tr>
                     <td> Assistenza integrative </td>
-                    <td colspan="3"><?= nl2br($document["welfare"]["assistenza"])?></td>
+                    <td colspan="3"><?= nl2br($document["welfare"]["assistenza"]) ?></td>
                 </tr>
 
                 <tr>
                     <td> Enti bilaterali</td>
-                    <td colspan="3"><?= nl2br($document["welfare"]["enti"])?></td>
+                    <td colspan="3"><?= nl2br($document["welfare"]["enti"]) ?></td>
                 </tr>
                 <tr>
                     <td> Polizze assicurative </td>
-                    <td colspan="3"><?= nl2br($document["welfare"]["polizze"])?></td>
+                    <td colspan="3"><?= nl2br($document["welfare"]["polizze"]) ?></td>
                 </tr>
 
             </tbody>

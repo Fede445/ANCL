@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header dontprint">
     <ul class="container flex">
         <li class="website">
             <a href="index.php">ANCL U.P. di VERONA</a>
