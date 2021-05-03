@@ -1,0 +1,62 @@
+table.minimalistBlack {
+  border: 1px solid #000000;
+  width: 95%;
+  text-align: left;
+  margin: 32px auto;
+  border-collapse: collapse;
+  background: #FFFFFF;
+}
+
+table.minimalistBlack td,
+table.minimalistBlack th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+  background: #FFFFFF;
+}
+
+table.minimalistBlack tbody td {
+  font-size: 20px;
+  background: #FFFFFF;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+table.minimalistBlack thead {
+  background: #CFCFCF;
+  background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  border-bottom: 1px solid #000000;
+}
+
+table.minimalistBlack thead th {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  background: #CFCFCF;
+}
+
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #27C6D4;
+  font-style: oblique;
+  margin: 0;
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 35px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
+h3 {
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}

@@ -13,3 +13,5 @@
 
 # Remove all desktop.ini
 desktop.ini
+
+vendor/
