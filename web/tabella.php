@@ -17,7 +17,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     header("location: index.php");
     exit;
 }
-
+$listaPeriodi=$db->tables->find(["sector_id" => $document["sector_id"]], ['projection' => ['valid_from' => 1]]);
 // TODO: implementare "documento non trovato"
 ?>
 
@@ -41,12 +41,14 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
         <h1> ANCL UP VERONA </h1>
         <h2> TERZIARIO - CONFCOMMERCIO </h2></br>
         <h3> Vigente da <div class="dropdown">
-                <button class="dropbtn">2015-2020 <i class="fas fa-angle-down" style="padding-left:8px;"></i></button>
+                <button class="dropbtn"><?= $document["valid_from"]->toDateTime()->format("F Y") ?> <i class="dontprint fas fa-angle-down" style="padding-left:8px;"></i></button>
 
             <div class="dropdown-content">
-                <a href="#">2010-2015</a>
-                <a href="#">2015-2020</a>
-                <a href="#">2015-2020</a>
+            <?php foreach ($listaPeriodi as $periodo) { ?>
+                    <a href="tabella.php?id=<?= $periodo["_id"] ?>">
+                        <?php echo htmlspecialchars($periodo["valid_from"]->toDateTime()->format("F Y")); ?>
+                    </a>
+                <?php } ?>
                 
             </div>
         </div></h3>

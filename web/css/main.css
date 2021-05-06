@@ -149,7 +149,12 @@ main.container {
   }
 
   .dontprint {
-    display: none;
+    display: none !important;
+  }
+
+  .dropbtn {
+    box-shadow: none !important;
+    background-color: transparent !important;
   }
 }
 
