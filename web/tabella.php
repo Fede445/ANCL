@@ -30,6 +30,8 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     <link rel="stylesheet" href="css/tabella.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -37,8 +39,17 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
 
     <main class="container">
         <h1> ANCL UP VERONA </h1>
-        <h2> TERZIARIO - CONFCOMMERCIO </h2>
-        <h3> Vigente da <?= $document["valid_from"]->toDateTime()->format("F Y") ?></h3>
+        <h2> TERZIARIO - CONFCOMMERCIO </h2></br>
+        <h3> Vigente da <div class="dropdown">
+                <button class="dropbtn">2015-2020 <i class="fas fa-angle-down" style="padding-left:8px;"></i></button>
+
+            <div class="dropdown-content">
+                <a href="#">2010-2015</a>
+                <a href="#">2015-2020</a>
+                <a href="#">2015-2020</a>
+                
+            </div>
+        </div></h3>
         <table class="minimalistBlack">
             <thead>
                 <tr>

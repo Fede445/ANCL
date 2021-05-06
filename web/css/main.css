@@ -158,3 +158,17 @@ main.container {
     flex-direction: column;
   }
 }
+header a:visited , header a:link{
+  color:#ffffff;
+  text-decoration:none;
+}
+header a:active, header a:hover{
+  text-decoration: underline;
+}
+main a:visited, main a:link{
+  color: #042325;
+  text-decoration: none;
+}
+main a:hover , main a:active{
+  text-decoration: underline;
+}
