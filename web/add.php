@@ -40,7 +40,6 @@ $table_id = $document["_id"];
 
     <main class="container">
         <h1> ANCL UP VERONA</h1>
-        <a href="to-add.php?sectorid=<?= $settore["_id"] ?>">ADD</a>
         <h2> <?= $settore['name'] ?> </h2></br>
         <h3> Vigente da <div class="dropdown">
             

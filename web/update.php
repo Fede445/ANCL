@@ -34,32 +34,31 @@ $table = $db->tables->replaceOne(
 );
 */
 
-$table = $db->tables->insertOne([
-    'sector_id' => $document["sector_id"],
-    'valid_from' => new MongoDB\BSON\UTCDateTime(),
-    'stipule' => [ 
-        array(
-            'name' => $stip,
-            'dataStipula' => $dataS,
-            'decorrenza' => $decor,
-            'scadenza' => $scade,
-            'parti' => $parti
-        )
+$table = $db->tables->replaceOne(
+    ['_id' => new MongoDB\BSON\ObjectId($_GET['id'])],
+    [
+        'sector_id' => $document["sector_id"],
+        'valid_from' => new MongoDB\BSON\UTCDateTime(),
+        'stipule' => [
+            array(
+                'name' => $stip,
+                'dataStipula' => $dataS,
+                'decorrenza' => $decor,
+                'scadenza' => $scade,
+                'parti' => $parti
+            )
         ],
-        'parametri' => [ 
-                'divisori' => $divi,
-                'mensilita' => $mens
+        'parametri' => [
+            'divisori' => $divi,
+            'mensilita' => $mens
         ],
-        'welfare' => [ 
-                'previdenza' => $previ,
-                'assistenza' => $assi,
-                'enti' => $enti,
-                'polizze' => $poli
+        'welfare' => [
+            'previdenza' => $previ,
+            'assistenza' => $assi,
+            'enti' => $enti,
+            'polizze' => $poli
         ]
-]);
-
-$db->tables->deleteOne(["_id" => new MongoDB\BSON\ObjectId($_GET["id"])]);
+    ]
+);
 
 header("location: index.php");
-
-?>
