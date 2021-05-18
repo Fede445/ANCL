@@ -39,9 +39,11 @@ $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
     <?php include "header.php" ?>
 
     <main class="container">
-        <h1> ANCL UP VERONA </h1>
+        <h1> ANCL UP VERONA</h1>
+        <a href="to-add.php?sectorid=<?= $settore["_id"] ?>">ADD</a>
         <h2> <?= $settore['name'] ?> </h2></br>
         <h3> Vigente da <div class="dropdown">
+            
                 <button class="dropbtn"><?= strftime("%B %G", $document["valid_from"]->toDateTime()->getTimestamp()) ?> <i class="dontprint fas fa-angle-down" style="padding-left:8px;"></i></button>
 
                 <div class="dropdown-content">
@@ -49,7 +51,8 @@ $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
                         <a href="tabella.php?id=<?= $periodo["_id"] ?>">
                             <?= strftime("%B %G",$periodo["valid_from"]->toDateTime()->getTimestamp()); ?>
                         </a>
-                    <?php } ?>
+                    <?php 
+                    } ?>
 
                 </div>
             </div>
