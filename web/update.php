@@ -26,9 +26,10 @@ $poli = $_POST['poli'];
 
 $document = $db->tables->findOne(["_id" => new MongoDB\BSON\ObjectId($_GET["id"])]);
 
-$table = $db->tables->updateOne(
-    [ '_id' => '60a40eaf204d860b2d3ef502'],
-    ['$set' => ['sector_id' => 'asdad']]
+// devi convertirlo prima a un ObjectId
+$table = $db->tables->replaceOne(
+    [ '_id' => new MongoDB\BSON\ObjectId($_GET['id'])],
+    [ 'nome' => 'test']
 );
 
 var_dump($table);
