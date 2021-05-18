@@ -41,6 +41,7 @@ if (isset($_GET["sectorid"])) {
 
             <main class="container">
                 <h1> ANCL UP VERONA </h1>
+                <a href="to-add.php?sectorid=<?= $_GET["sectorid"] ?>">ADD</a>
                 <h3>Nessun contratto per il seguente settore</h3>
             </main>
         </body>

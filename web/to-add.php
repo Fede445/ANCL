@@ -25,18 +25,14 @@ if (isset($_GET["sectorid"])) {
                 )
                 ],
                 'parametri' => [ 
-                    array(
                         'divisori' => "",
                         'mensilita' => 0
-                    )
                 ],
                 'welfare' => [ 
-                    array(
                         'previdenza' => "",
                         'assistenza' => "",
                         'enti' => "",
                         'polizze' => ""
-                    )
                 ]
     ]);
         

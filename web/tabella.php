@@ -38,8 +38,6 @@ $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
 <body>
     <?php include "header.php" ?>
 
-    <?php var_dump($settore)?>
-
     <main class="container">
         <h1> ANCL UP VERONA</h1>
         <a href="to-add.php?sectorid=<?= $settore["_id"] ?>">ADD</a>

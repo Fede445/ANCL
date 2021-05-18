@@ -19,7 +19,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
 }
 $listaPeriodi = $db->tables->find(["sector_id" => $document["sector_id"]], ['projection' => ['valid_from' => 1]]);
 $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
-// TODO: implementare "documento non trovato"
+$table_id = $document["_id"];
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +37,6 @@ $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
 
 <body>
     <?php include "header.php" ?>
-
-    <?php var_dump($settore)?>
 
     <main class="container">
         <h1> ANCL UP VERONA</h1>
@@ -59,83 +57,108 @@ $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
                 </div>
             </div>
         </h3>
-        <table class="minimalistBlack">
-            <thead>
-                <tr>
-                    <th colspan="4"> Stipule </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td>Data di stipula</td>
-                    <td>Decorrenza</td>
-                    <td>Scadenza</td>
-                </tr>
-                <?php foreach ($document["stipule"] as $stipula) { ?>
+        <form method="post" action="update.php?id=<?= $document["_id"]?>">
+            <table class="minimalistBlack">
+                <thead>
                     <tr>
-                        <td style="border-bottom:none"><?= $stipula["name"] ?></td>
-                        <td><?= $stipula["dataStipula"] ?></td>
-                        <td><?= $stipula["decorrenza"] ?></td>
-                        <td><?= $stipula["scadenza"] ?><br><br></td>
+                        <th colspan="4"> Stipule </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>Data di stipula</td>
+                        <td>Decorrenza</td>
+                        <td>Scadenza</td>
+                    </tr>
+                    <?php foreach ($document["stipule"] as $stipula) { ?>
+                        <tr>
+                            <td style="border-bottom:none"><?= $stipula["name"] ?>
+                            <textarea id="stip" name="stip" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                            </td>
+                            <td><?= $stipula["dataStipula"] ?>
+                            <input type="date" id="dataS" name="dataS">
+                            </td>
+                            <td><?= $stipula["decorrenza"] ?>
+                            <textarea id="decor" name="decor" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                            </td>
+                            <td><?= $stipula["scadenza"] ?><br><br>
+                            <input type="date" id="scade" name="scade">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top:none"> </td>
+                            <td>Parti stipulanti</td>
+                            <td colspan="2"><?= $stipula["parti"] ?>
+                            <textarea id="parti" name="parti" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                            </td>
+
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <table class="minimalistBlack">
+                <thead>
+                    <tr>
+                        <th colspan="4"> Parametri </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Divisori contrattuali</td>
+                        <td colspan="3"><?= nl2br($document["parametri"]["divisori"]) ?>
+                        <textarea id="divi" name="divi" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        </td>
                     </tr>
                     <tr>
-                        <td style="border-top:none"> </td>
-                        <td>Parti stipulanti</td>
-                        <td colspan="2"><?= $stipula["parti"] ?></td>
-
+                        <td> Mensilità </td>
+                        <td colspan="3" style="text-align:center"><?= $document["parametri"]["mensilita"] ?>
+                        <input type="number" id="mens" name="mens">
+                        </td>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-        <table class="minimalistBlack">
-            <thead>
-                <tr>
-                    <th colspan="4"> Parametri </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> Divisori contrattuali</td>
-                    <td colspan="3"><?= nl2br($document["parametri"]["divisori"]) ?></td>
-                </tr>
-                <tr>
-                    <td> Mensilità </td>
-                    <td colspan="3" style="text-align:center"><?= $document["parametri"]["mensilita"] ?></td>
-                </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
 
 
 
-        <table class="minimalistBlack">
-            <thead>
-                <tr>
-                    <th colspan="4"> Welfare </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> Previdenza complementare</td>
-                    <td colspan="3"> <?= nl2br($document["welfare"]["previdenza"]) ?></td>
-                </tr>
-                <tr>
-                    <td> Assistenza integrative </td>
-                    <td colspan="3"><?= nl2br($document["welfare"]["assistenza"]) ?></td>
-                </tr>
+            <table class="minimalistBlack">
+                <thead>
+                    <tr>
+                        <th colspan="4"> Welfare </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Previdenza complementare</td>
+                        <td colspan="3"> <?= nl2br($document["welfare"]["previdenza"]) ?>
+                        <textarea id="previ" name="previ" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Assistenza integrative </td>
+                        <td colspan="3"><?= nl2br($document["welfare"]["assistenza"]) ?>
+                        <textarea id="assi" name="assi" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td> Enti bilaterali</td>
-                    <td colspan="3"><?= nl2br($document["welfare"]["enti"]) ?></td>
-                </tr>
-                <tr>
-                    <td> Polizze assicurative </td>
-                    <td colspan="3"><?= nl2br($document["welfare"]["polizze"]) ?></td>
-                </tr>
+                    <tr>
+                        <td> Enti bilaterali</td>
+                        <td colspan="3"><?= nl2br($document["welfare"]["enti"]) ?>
+                        <textarea id="enti" name="enti" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Polizze assicurative </td>
+                        <td colspan="3"><?= nl2br($document["welfare"]["polizze"]) ?>
+                        <textarea id="poli" name="poli" placeholder="Write something.." style="height:200px; width:200px;"></textarea>
+                        </td>
+                    </tr>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            <input type="submit" name="submit" value="Submit">
+        </form>
     </main>
 </body>
 
