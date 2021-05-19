@@ -25,13 +25,41 @@ $enti = $_POST['enti'];
 $poli = $_POST['poli'];
 
 $document = $db->tables->findOne(["_id" => new MongoDB\BSON\ObjectId($_GET["id"])]);
+$settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
 
-// devi convertirlo prima a un ObjectId
+/*
 $table = $db->tables->replaceOne(
     [ '_id' => new MongoDB\BSON\ObjectId($_GET['id'])],
-    [ 'nome' => 'test']
+    [ 'sector_id' => $document["sector_id"]]    
 );
+*/
 
-var_dump($table);
+$table = $db->tables->insertOne([
+    'sector_id' => $document["sector_id"],
+    'valid_from' => new MongoDB\BSON\UTCDateTime(),
+    'stipule' => [ 
+        array(
+            'name' => $stip,
+            'dataStipula' => $dataS,
+            'decorrenza' => $decor,
+            'scadenza' => $scade,
+            'parti' => $parti
+        )
+        ],
+        'parametri' => [ 
+                'divisori' => $divi,
+                'mensilita' => $mens
+        ],
+        'welfare' => [ 
+                'previdenza' => $previ,
+                'assistenza' => $assi,
+                'enti' => $enti,
+                'polizze' => $poli
+        ]
+]);
+
+$db->tables->deleteOne(["_id" => new MongoDB\BSON\ObjectId($_GET["id"])]);
+
+header("location: index.php");
 
 ?>
