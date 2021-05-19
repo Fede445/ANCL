@@ -156,7 +156,9 @@ $table_id = $document["_id"];
 
                 </tbody>
             </table>
-            <input type="submit" name="submit" value="Submit">
+            <div style="display: flex; justify-content:space-evenly">
+                <input class="btn btn-success" type="submit" name="submit" value="Aggiungi" style="padding: 5px 20px;">
+            </div>
         </form>
     </main>
 </body>
