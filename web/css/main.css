@@ -127,6 +127,40 @@ main.container {
 }
 
 /* END settori */
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-danger {
+  color: #fff !important;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
 
 @media print {
   @page {
@@ -149,7 +183,12 @@ main.container {
   }
 
   .dontprint {
-    display: none;
+    display: none !important;
+  }
+
+  .dropbtn {
+    box-shadow: none !important;
+    background-color: transparent !important;
   }
 }
 
@@ -157,4 +196,18 @@ main.container {
   .header .flex {
     flex-direction: column;
   }
+}
+header a:visited , header a:link{
+  color:#ffffff;
+  text-decoration:none;
+}
+header a:active, header a:hover{
+  text-decoration: underline;
+}
+main a:visited, main a:link{
+  color: #042325;
+  text-decoration: none;
+}
+main a:hover , main a:active{
+  text-decoration: underline;
 }

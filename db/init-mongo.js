@@ -16,14 +16,14 @@ db.createCollection('users');
 db.users.insertMany(
     [
         {
-            _id: 'capoSupremo',
+            _id: 'caposupremo@ancl.it',
             role: 'admin',
             displayName: 'Posso Modificare',
             // 12345678
             password: '$2y$10$JLwOGSlcmIqjP/bw4cn5zehJfL5BkfjMVTVzFOOjc/Db13lDtEU0.'
         },
         {
-            _id: 'utente',
+            _id: 'utente@ancl.it',
             role: 'viewer',
             displayName: 'Posso Leggere',
             // password

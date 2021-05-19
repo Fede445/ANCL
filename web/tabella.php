@@ -17,7 +17,8 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     header("location: index.php");
     exit;
 }
-
+$listaPeriodi = $db->tables->find(["sector_id" => $document["sector_id"]], ['projection' => ['valid_from' => 1]]);
+$settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
 // TODO: implementare "documento non trovato"
 ?>
 
@@ -30,15 +31,37 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     <link rel="stylesheet" href="css/tabella.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
     <?php include "header.php" ?>
 
     <main class="container">
+        <?php if ($_SESSION["role"] == "admin") { ?>
+            <div class="dontprint container btn-container">
+            <a class="btn btn-success" href="to-add.php?sectorid=<?= $settore["_id"] ?>"><i class="fas fa-plus-circle"></i> Aggiungi contratto</a>
+            <a class="btn btn-danger" href="delete.php?id=<?= $document['_id'] ?>"><i class="far fa-trash-alt"></i> Elimina contratto</a>
+            </div>
+        <?php } ?>
         <h1> ANCL UP VERONA </h1>
-        <h2> TERZIARIO - CONFCOMMERCIO </h2>
-        <h3> Vigente da <?= $document["valid_from"]->toDateTime()->format("F Y") ?></h3>
+        <h2> <?= $settore['name'] ?> </h2></br>
+        <h3> Vigente da <div class="dropdown">
+            
+                <button class="dropbtn"><?= strftime("%B %G", $document["valid_from"]->toDateTime()->getTimestamp()) ?> <i class="dontprint fas fa-angle-down" style="padding-left:8px;"></i></button>
+
+                <div class="dropdown-content">
+                    <?php foreach ($listaPeriodi as $periodo) { ?>
+                        <a href="tabella.php?id=<?= $periodo["_id"] ?>">
+                            <?= strftime("%B %G", $periodo["valid_from"]->toDateTime()->getTimestamp()); ?>
+                        </a>
+                    <?php 
+                    } ?>
+
+                </div>
+            </div>
+        </h3>
         <table class="minimalistBlack">
             <thead>
                 <tr>

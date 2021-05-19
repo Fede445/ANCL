@@ -106,7 +106,7 @@ if ($_POST['action'] == 'Del') {
 <html>
 
 <head>
-  <title>Add-Del | ANCL Verona</title>
+  <title> Utenti | ANCL Verona</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/tabella.css">
   <link rel="stylesheet" href="css/users.css">
@@ -119,27 +119,27 @@ if ($_POST['action'] == 'Del') {
       <h1>Gestione utenti</h1>
     </div>
     <form method="post" action="">
-      <div>
+      <div style="padding: 10px;">
 
-        <div style="padding: 10px">
+        <div>
           <input type="text" class="form-control" placeholder="Emai" name="email"> <br>
         </div>
 
-        <div style="padding: 10px">
+        <div>
           <input type="text" class="form-control" placeholder="Password" name="passw"> <br>
         </div>
 
-        <div style="padding: 10px">
+        <div>
           <input type="text" class="form-control" placeholder="Username" name="username"> <br>
         </div>
 
-        <div style="padding: 10px">
+        <div>
           <input type="text" class="form-control" placeholder="Modificare/Visualizzare" name="mod_vis"> <br>
         </div>
 
-        <div style="padding: 10px">
-          <button type="submit" class="btn btn-success" name="action" value="Add"> Aggiungi </button>
-          <button type="submit" class="btn btn-success" name="action" value="Del"> Elimina </button>
+        <div style="display: flex; justify-content: space-around;">
+          <button type="submit" name="action" value="Add"> Aggiungi </button>
+          <button type="submit" name="action" value="Del"> Elimina </button>
         </div>
       </div>
     </form>

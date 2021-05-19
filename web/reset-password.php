@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($new_password_err) && empty($confirm_password_err)) {
         // Set parameters
         $param_password = password_hash($new_password, PASSWORD_DEFAULT);
-        $param_id = $_SESSION['username'];
+        $param_id = $_SESSION['email'];
 
         try {
             $update_result = $db->users->updateOne(['_id' => $param_id], ['$set' => ['password' => $param_password]]);
@@ -65,44 +65,157 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Reset Password</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        body {
-            font: 14px sans-serif;
+                body{
+        padding-top:4.2rem;
+		padding-bottom:4.2rem;
+		background:rgba(0, 0, 0, 0.76);
         }
-
-        .wrapper {
-            width: 350px;
-            padding: 20px;
-        }
+        a{
+         text-decoration:none !important;
+         }
+         h1,h2,h3{
+         font-family: 'Kaushan Script', cursive;
+         }
+          .myform{
+		position: relative;
+		display: -ms-flexbox;
+		display: flex;
+		padding: 1rem;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		width: 100%;
+		pointer-events: auto;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid rgba(0,0,0,.2);
+		border-radius: 1.1rem;
+		outline: 0;
+		max-width: 500px;
+		 }
+         .tx-tfm{
+         text-transform:uppercase;
+         }
+         .mybtn{
+         border-radius:50px;
+         }
+        
+         .login-or {
+         position: relative;
+         color: #aaa;
+         margin-top: 10px;
+         margin-bottom: 10px;
+         padding-top: 10px;
+         padding-bottom: 10px;
+         }
+         .span-or {
+         display: block;
+         position: absolute;
+         left: 50%;
+         top: -2px;
+         margin-left: -25px;
+         background-color: #fff;
+         width: 50px;
+         text-align: center;
+         }
+         .hr-or {
+         height: 1px;
+         margin-top: 0px !important;
+         margin-bottom: 0px !important;
+         }
+         .google {
+         color:#666;
+         width:100%;
+         height:40px;
+         text-align:center;
+         outline:none;
+         border: 1px solid lightgrey;
+         }
+          form .error {
+         color: #ff0000;
+         }
+         #second{display:none;}
     </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
+<body>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <body>
-    <div class="wrapper">
-        <h2>Reset Password</h2>
-        <p>Please fill out this form to reset your password.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
-                <label>New Password</label>
-                <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
-                <span class="help-block"><?php echo $new_password_err; ?></span>
-            </div>
-            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control">
-                <span class="help-block"><?php echo $confirm_password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <a class="btn btn-link" href="../index.php">Cancel</a>
-            </div>
-        </form>
-    </div>
+    <div class="container">
+        <div class="row">
+			<div class="col-md-5 mx-auto">
+			<div id="first">
+				<div class="myform form ">
+					 <div class="logo mb-3">
+						 <div class="col-md-12 text-center">
+							<h1>ANCL Reset Password</h1>
+						 </div>
+					</div>
+                   <form action="" method="post" name="login">
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">Nuova Password</label>
+                              <input type="password" name="new_password"  class="form-control" id="password" aria-describedby="emailHelp" placeholder="Nuova password">
+                           </div>
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">Conferma Password</label>
+                              <input type="password" name="confirm_password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Conferma password">
+                           </div>
+                           <div class="col-md-12 text-center ">
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Invio</button>
+                           </div>
+                        </form>
+                 
+				</div>
+			</div>
+		</div>
+      </div>   
+         
 </body>
+<script type="text/javascript">
+$("#signup").click(function() {
+$("#first").fadeOut("fast", function() {
+$("#second").fadeIn("fast");
+});
+});
 
+$("#signin").click(function() {
+$("#second").fadeOut("fast", function() {
+$("#first").fadeIn("fast");
+});
+});
+
+
+  
+         $(function() {
+           $("form[name='login']").validate({
+             rules: {
+               password: {
+                 required: true,
+                 
+               }
+             },
+             password: {
+                 required: "Please enter password",
+                
+               }
+               
+             },
+             submitHandler: function(form) {
+               form.submit();
+             }
+           });
+         });
+
+</script>
+</body>
 </html>

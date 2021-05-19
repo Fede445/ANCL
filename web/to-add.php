@@ -10,8 +10,33 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
-if (isset($_GET["sectorid"]) && !empty($_GET["sectorid"])) {
-    // Dato l'id di un settore seleziono l'ultima tabella
+if (isset($_GET["sectorid"])) {
+    
+    $db->tables->insertOne([
+            'sector_id' => new MongoDB\BSON\ObjectId($_GET["sectorid"]),
+            'valid_from' => new MongoDB\BSON\UTCDateTime(),
+            'stipule' => [ 
+                array(
+                    'name' => "",
+                    'dataStipula' => "",
+                    'decorrenza' => "",
+                    'scadenza' => "",
+                    'parti' => ""
+                )
+                ],
+                'parametri' => [ 
+                        'divisori' => "",
+                        'mensilita' => 0
+                ],
+                'welfare' => [ 
+                        'previdenza' => "",
+                        'assistenza' => "",
+                        'enti' => "",
+                        'polizze' => ""
+                ]
+    ]);
+        
+    
     $document = $db->tables->findOne(
         ["sector_id" => new MongoDB\BSON\ObjectId($_GET["sectorid"])],
         [
@@ -19,11 +44,12 @@ if (isset($_GET["sectorid"]) && !empty($_GET["sectorid"])) {
             "limit" => 1
         ]
     );
-
     if ($document) {
         $table_id = $document["_id"];
-        header("location: tabella.php?id=$table_id");
-    } else {
+        header("location: add.php?id=$table_id");
+    }
+
+    else {
 ?>
         <!DOCTYPE html>
         <html>
@@ -34,18 +60,12 @@ if (isset($_GET["sectorid"]) && !empty($_GET["sectorid"])) {
             <link rel="stylesheet" href="css/tabella.css">
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet" />
-            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
         </head>
 
         <body>
             <?php include "header.php" ?>
-            <main class="container">
-                <?php if ($_SESSION["role"] == "admin") { ?>
-                    <div class="dontprint container btn-container">
-                        <a class="btn btn-success" href="to-add.php?sectorid=<?= $_GET["sectorid"] ?>"><i class="fas fa-plus-circle"></i> Aggiungi contratto</a>
-                    </div>
-                <?php } ?>
 
+            <main class="container">
                 <h1> ANCL UP VERONA </h1>
                 <h3>Nessun contratto per il seguente settore</h3>
             </main>
