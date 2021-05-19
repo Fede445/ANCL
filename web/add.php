@@ -73,15 +73,15 @@ $table_id = $document["_id"];
                     <?php foreach ($document["stipule"] as $stipula) { ?>
                         <tr>
                             <td style="border-bottom:none"><?= $stipula["name"] ?>
-                            <textarea id="stip" name="stip" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                            <textarea id="stip" name="stip" style="height:3em; width: 200px;"></textarea>
                             </td>
                             <td><?= $stipula["dataStipula"] ?>
                             <input type="date" id="dataS" name="dataS">
                             </td>
                             <td><?= $stipula["decorrenza"] ?>
-                            <textarea id="decor" name="decor" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                            <input type="date" id="decor" name="decor">
                             </td>
-                            <td><?= $stipula["scadenza"] ?><br><br>
+                            <td><?= $stipula["scadenza"] ?>
                             <input type="date" id="scade" name="scade">
                             </td>
                         </tr>
@@ -89,7 +89,7 @@ $table_id = $document["_id"];
                             <td style="border-top:none"> </td>
                             <td>Parti stipulanti</td>
                             <td colspan="2"><?= $stipula["parti"] ?>
-                            <textarea id="parti" name="parti" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                            <textarea id="parti" name="parti" style="height:3em; width: 200px;"></textarea>
                             </td>
 
                         </tr>
@@ -106,13 +106,13 @@ $table_id = $document["_id"];
                     <tr>
                         <td> Divisori contrattuali</td>
                         <td colspan="3"><?= nl2br($document["parametri"]["divisori"]) ?>
-                        <textarea id="divi" name="divi" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        <textarea id="divi" name="divi" style="height:3em; width: 200px;"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td> Mensilità </td>
-                        <td colspan="3" style="text-align:center"><?= $document["parametri"]["mensilita"] ?>
-                        <input type="number" id="mens" name="mens">
+                        <td colspan="3" style="text-align:center">
+                        <input type="number" id="mens" name="mens" value="<?= $document["parametri"]["mensilita"] ?>">
                         </td>
                     </tr>
                 </tbody>
@@ -131,26 +131,26 @@ $table_id = $document["_id"];
                     <tr>
                         <td> Previdenza complementare</td>
                         <td colspan="3"> <?= nl2br($document["welfare"]["previdenza"]) ?>
-                        <textarea id="previ" name="previ" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        <textarea id="previ" name="previ" style="height:200px; width: 200px;"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td> Assistenza integrative </td>
                         <td colspan="3"><?= nl2br($document["welfare"]["assistenza"]) ?>
-                        <textarea id="assi" name="assi" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        <textarea id="assi" name="assi" style="height:200px; width: 200px;"></textarea>
                         </td>
                     </tr>
 
                     <tr>
                         <td> Enti bilaterali</td>
                         <td colspan="3"><?= nl2br($document["welfare"]["enti"]) ?>
-                        <textarea id="enti" name="enti" placeholder="Write something.." style="height:200px; width: 200px;"></textarea>
+                        <textarea id="enti" name="enti" style="height:200px; width: 200px;"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td> Polizze assicurative </td>
                         <td colspan="3"><?= nl2br($document["welfare"]["polizze"]) ?>
-                        <textarea id="poli" name="poli" placeholder="Write something.." style="height:200px; width:200px;"></textarea>
+                        <textarea id="poli" name="poli" style="height:200px; width:200px;"></textarea>
                         </td>
                     </tr>
 
