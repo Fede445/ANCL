@@ -16,7 +16,7 @@ db.createCollection('users');
 db.users.insertMany(
     [
         {
-            _id: 'caposupremo@ancl.it',
+            _id: 'admin@ancl.it',
             role: 'admin',
             displayName: 'Posso Modificare',
             // 12345678
