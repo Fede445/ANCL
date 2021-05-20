@@ -26,11 +26,12 @@ $poli = $_POST['poli'];
 
 $document = $db->tables->findOne(["_id" => new MongoDB\BSON\ObjectId($_GET["id"])]);
 $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
+$settore_id = $document["sector_id"];
 
 /*
 $table = $db->tables->replaceOne(
     [ '_id' => new MongoDB\BSON\ObjectId($_GET['id'])],
-    [ 'sector_id' => $document["sector_id"]]    
+    [ 'sector_id' => $document["sector_id"]]
 );
 */
 
@@ -61,4 +62,4 @@ $table = $db->tables->replaceOne(
     ]
 );
 
-header("location: index.php");
+header("location: to-table.php?sectorid=$settore_id");

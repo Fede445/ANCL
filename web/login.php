@@ -171,9 +171,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                               <label for="exampleInputEmail1">Password</label>
                               <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
                            </div>
-                           <div class="form-group">
-                              <p class="text-center">Accedento accetti i nostri <a href="#">Termini di utilizzo</a></p>
-                           </div>
                            <div class="col-md-12 text-center ">
                               <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
                            </div>

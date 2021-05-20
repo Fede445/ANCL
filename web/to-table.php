@@ -25,31 +25,33 @@ if (isset($_GET["sectorid"]) && !empty($_GET["sectorid"])) {
         header("location: tabella.php?id=$table_id");
     } else {
 ?>
-        <!DOCTYPE html>
-        <html>
+<!DOCTYPE html>
+<html>
 
-        <head>
-            <title>Tabella | ANCL Verona</title>
-            <link rel="stylesheet" href="css/main.css">
-            <link rel="stylesheet" href="css/tabella.css">
-            <link rel="preconnect" href="https://fonts.gstatic.com" />
-            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet" />
-            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-        </head>
+<head>
+    <title>Tabella | ANCL Verona</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/tabella.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
 
-        <body>
-            <?php include "header.php" ?>
-            <main class="container">
-                <?php if ($_SESSION["role"] == "admin") { ?>
-                    <div class="dontprint container btn-container">
-                        <a class="btn btn-success" href="to-add.php?sectorid=<?= $_GET["sectorid"] ?>"><i class="fas fa-plus-circle"></i> Aggiungi contratto</a>
-                    </div>
-                <?php } ?>
+<body>
+    <?php include "header.php" ?>
+    <main class="container">
+        <?php if ($_SESSION["role"] == "admin") { ?>
+        <div class="dontprint container btn-container">
+            <a class="btn btn-success"
+                href="to-add.php?sectorid=<?= $_GET["sectorid"] ?>"><i
+                    class="fas fa-plus-circle"></i> Aggiungi taella paga</a>
+        </div>
+        <?php } ?>
 
-                <h1> ANCL UP VERONA </h1>
-                <h3>Nessun contratto per il seguente settore</h3>
-            </main>
-        </body>
+        <h1> ANCL UP VERONA </h1>
+        <h3>Nessuna tabella paga per il seguente settore</h3>
+    </main>
+</body>
 <? }
 } else {
     // Se non ci sono parametri GET ritorno ai settori

@@ -41,8 +41,8 @@ $settore = $db->sectors->findOne(["_id" => $document["sector_id"]]);
     <main class="container">
         <?php if ($_SESSION["role"] == "admin") { ?>
             <div class="dontprint container btn-container">
-            <a class="btn btn-success" href="to-add.php?sectorid=<?= $settore["_id"] ?>"><i class="fas fa-plus-circle"></i> Aggiungi contratto</a>
-            <a class="btn btn-danger" href="delete.php?id=<?= $document['_id'] ?>"><i class="far fa-trash-alt"></i> Elimina contratto</a>
+            <a class="btn btn-success" href="to-add.php?sectorid=<?= $settore["_id"] ?>"><i class="fas fa-plus-circle"></i> Aggiungi tabella paga</a>
+            <a class="btn btn-danger" href="delete.php?id=<?= $document['_id'] ?>"><i class="far fa-trash-alt"></i> Elimina tabella paga</a>
             </div>
         <?php } ?>
         <h1> ANCL UP VERONA </h1>
